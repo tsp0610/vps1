@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>vps.txt</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 1rem;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <pre id="content">Loading…</pre>
+  <script>
+    fetch('./vps.txt')
+      .then(r => r.text())
+      .then(t => document.getElementById('content').textContent = t)
+      .catch(() => document.getElementById('content').textContent = '⚠️ Failed to load vps.txt');
+  </script>
+</body>
+</html>
